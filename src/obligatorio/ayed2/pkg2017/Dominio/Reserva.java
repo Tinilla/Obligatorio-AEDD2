@@ -9,7 +9,7 @@ package obligatorio.ayed2.pkg2017.Dominio;
  *
  * @author Equipo
  */
-public class Reserva {
+public class Reserva implements Comparable<Reserva>{
     
     private int cliente;
     private Hotel hotel;
@@ -38,6 +38,11 @@ public class Reserva {
     {
         this.cliente = cli;
         this.hotel = hotel;
+    }
+
+    @Override
+    public int compareTo(Reserva o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

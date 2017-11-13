@@ -5,6 +5,9 @@
  */
 package obligatorio.ayed2.pkg2017.Dominio;
 
+import obligatorio.ayed2.pkg2017.Estructuras.Cola;
+import obligatorio.ayed2.pkg2017.Estructuras.Pila;
+
 /**
  *
  * @author Equipo
@@ -15,6 +18,33 @@ public class Hotel {
     private String nombre;
     private int estrellas;
     private int capacidad;
+    private int [] contadorRanking;
+    private Pila<Comentario> comentarios;
+    private Cola<Reserva> listaEspera;
+    
+    public int [] getContadorRanking(){
+        return contadorRanking;
+    }
+    
+    public void setContadorRanking(int [] contador){
+        this.contadorRanking = contador;
+    }
+    
+    public Pila<Comentario> getComentarios(){
+        return comentarios;
+    }
+    
+    public void setComentarios(Pila<Comentario> coment){
+        this.comentarios = coment;
+    }
+    
+    public Cola<Reserva> getListaEspera(){
+        return listaEspera;
+    }
+    
+    public void setListaEspera(Cola<Reserva> espera){
+        this.listaEspera = espera;
+    }
     
     public String getCiudad() {
         return ciudad;
@@ -54,6 +84,7 @@ public class Hotel {
         this.ciudad = ciudad;
         this.estrellas = cantEstrellas;
         this.capacidad = capacidad;
+        this.contadorRanking = new int [6];
     }
     
     

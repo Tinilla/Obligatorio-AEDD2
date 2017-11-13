@@ -9,7 +9,7 @@ package obligatorio.ayed2.pkg2017.Dominio;
  *
  * @author Equipo
  */
-public class Comentario {
+public class Comentario implements Comparable<Comentario>{
     
     private Hotel hotel;
     private String comentario;
@@ -55,6 +55,11 @@ public class Comentario {
      */
     public void setRanking(int ranking) {
         this.ranking = ranking;
+    }
+
+    @Override
+    public int compareTo(Comentario o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

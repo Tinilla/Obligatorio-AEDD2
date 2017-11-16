@@ -5,14 +5,15 @@
  */
 package obligatorio.ayed2.pkg2017.Dominio;
 
-import obligatorio.ayed2.pkg2017.Estructuras.Cola;
 import obligatorio.ayed2.pkg2017.Estructuras.Pila;
-
+import obligatorio.ayed2.pkg2017.Estructuras.Lista;
+import obligatorio.ayed2.pkg2017.Estructuras.TablaDCD;
+import obligatorio.ayed2.pkg2017.Estructuras.TablaDispersionAbierta;
 /**
  *
  * @author Equipo
  */
-public class Hotel {
+public class Hotel implements Comparable<Hotel>{
     
     private String ciudad;
     private String nombre;
@@ -20,7 +21,9 @@ public class Hotel {
     private int capacidad;
     private int [] contadorRanking;
     private Pila<Comentario> comentarios;
-    private Cola<Reserva> listaEspera;
+    private Lista<Reserva> listaEspera;
+    private Lista<Servicio> servicios;
+    private TablaDCD<Reserva> reservas;
     
     public int [] getContadorRanking(){
         return contadorRanking;
@@ -38,11 +41,11 @@ public class Hotel {
         this.comentarios = coment;
     }
     
-    public Cola<Reserva> getListaEspera(){
+    public Lista<Reserva> getListaEspera(){
         return listaEspera;
     }
     
-    public void setListaEspera(Cola<Reserva> espera){
+    public void setListaEspera(Lista<Reserva> espera){
         this.listaEspera = espera;
     }
     
@@ -84,9 +87,43 @@ public class Hotel {
         this.ciudad = ciudad;
         this.estrellas = cantEstrellas;
         this.capacidad = capacidad;
-        this.contadorRanking = new int [6];
+        inicializarEstructuras();
     }
     
+    private void inicializarEstructuras(){
+        this.contadorRanking = new int [6];
+        this.comentarios = new Pila();
+        this.listaEspera = new Lista();
+    }
     
+    public int calcularRanking(){
+        int suma = 0;
+        int contador = 0;
+        for(int i = 0; i<contadorRanking.length; i++){
+            suma+= (contadorRanking[i] * i);
+            contador = contadorRanking[i];
+        }
+        return suma / contador;
+    }    
+
+    @Override
+    public int compareTo(Hotel o) {
+        if(nombre.compareTo(o.getNombre()) == 0){
+            if(ciudad.compareTo(o.getCiudad()) == 0){
+                return 0;
+            }
+            else{
+                return 1;
+            }
+        }
+        return -1;
+    }
     
+    @Override
+    public boolean equals(Object other){
+        if(this.nombre.equals(((Hotel)other).getNombre()) && this.ciudad.equals(((Hotel)other).getCiudad())){
+            return true;
+        }
+        return false;
+    }
 }

@@ -8,7 +8,7 @@ import obligatorio.ayed2.pkg2017.Sistema.TipoRet;
 
 /**
  *
- * @author toleee
+ * @author 
  */
 public class Prueba {
     static int cantCorrectas, cantIncorrectas, cantNoImplementadas;

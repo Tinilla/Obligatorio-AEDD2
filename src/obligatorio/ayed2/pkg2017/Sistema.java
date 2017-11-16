@@ -4,18 +4,29 @@
  */
 package obligatorio.ayed2.pkg2017;
 
+import obligatorio.ayed2.pkg2017.Dominio.Hotel;
+import obligatorio.ayed2.pkg2017.Estructuras.ArbolAVL;
+import obligatorio.ayed2.pkg2017.Estructuras.TablaDispersionAbierta;
+
 /**
  *
- * @author toleee
+ * @author 
  */
 public class Sistema {
+    ArbolAVL<Hotel> hotelesPorNombre;
+    ArbolAVL<Hotel> hotelesPorRanking;
+    TablaDispersionAbierta<Hotel> hotelesPorCiudad;
+    
     
     public enum TipoRet {
         OK, ERROR_1, ERROR_2, ERROR_3, NO_IMPLEMENTADA
     };
     
     public TipoRet crearSistemaReservas(){
-        return null;
+        hotelesPorNombre = new ArbolAVL();
+        hotelesPorRanking = new ArbolAVL();
+        hotelesPorCiudad = new TablaDispersionAbierta(50);
+        return TipoRet.OK;
     }
     
     public TipoRet destruirSistemaReservas(){
@@ -23,6 +34,7 @@ public class Sistema {
     }
     
     public TipoRet registrarHotel(String Ciudad, String Nombre, int Estrellas, int Capacidad){
+        Hotel elHotel = new Hotel(Nombre, Ciudad, Estrellas, Capacidad);
         return TipoRet.NO_IMPLEMENTADA;
     }
     

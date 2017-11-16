@@ -6,7 +6,7 @@ package obligatorio.ayed2.pkg2017;
 
 /**
  *
- * @author toleee
+ * @author 
  */
 public class Obligatorio_AyED2_2017 {
 

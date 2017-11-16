@@ -9,7 +9,7 @@ package obligatorio.ayed2.pkg2017.Estructuras;
  *
  * @author Equipo
  */
-public class ListaDoble <T extends Comparable <T>> implements IListaDoble<T> {
+public class Lista <T extends Comparable <T>> implements IListaDoble<T> {
     
     NodoDoble<T> inicio;
     int contador;
@@ -108,8 +108,8 @@ public class ListaDoble <T extends Comparable <T>> implements IListaDoble<T> {
         }
     }
     
-    public ListaDoble<T> cola(){
-        ListaDoble<T> cola = new ListaDoble<T>();
+    public Lista<T> cola(){
+        Lista<T> cola = new Lista<T>();
         NodoDoble<T> actual = inicio.getSiguiente();
         while(actual != null){
             cola.agregar(actual.getDato());
@@ -123,7 +123,7 @@ public class ListaDoble <T extends Comparable <T>> implements IListaDoble<T> {
     }
     
     public boolean contiene(T n){
-        ListaDoble<T> lista = new ListaDoble<T> ();
+        Lista<T> lista = new Lista<T> ();
         NodoDoble<T> actual = inicio;
         while(actual != null){
             if(actual.getDato().compareTo(n) == 0){
@@ -134,7 +134,7 @@ public class ListaDoble <T extends Comparable <T>> implements IListaDoble<T> {
         return false;
     }
     
-    public ListaDoble(){
+    public Lista(){
         inicio = null;
         contador= 0;
     }

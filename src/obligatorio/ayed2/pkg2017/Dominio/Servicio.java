@@ -9,7 +9,7 @@ package obligatorio.ayed2.pkg2017.Dominio;
  *
  * @author Equipo
  */
-public class Servicio {
+public class Servicio implements Comparable<Servicio>{
     
     private String ciudad;
     private Hotel hotel;
@@ -62,6 +62,11 @@ public class Servicio {
         this.ciudad = ciudad;
         this.hotel = hotel;
         this.servicio = servicio;
+    }
+
+    @Override
+    public int compareTo(Servicio o) {
+        return this.servicio.compareTo(o.getServicio());
     }
     
 }

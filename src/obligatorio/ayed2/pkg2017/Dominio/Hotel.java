@@ -8,7 +8,7 @@ package obligatorio.ayed2.pkg2017.Dominio;
 import obligatorio.ayed2.pkg2017.Estructuras.Pila;
 import obligatorio.ayed2.pkg2017.Estructuras.Lista;
 import obligatorio.ayed2.pkg2017.Estructuras.TablaDCD;
-import obligatorio.ayed2.pkg2017.Estructuras.TablaDispersionAbierta;
+import obligatorio.ayed2.pkg2017.Sistema;
 /**
  *
  * @author Equipo
@@ -21,9 +21,9 @@ public class Hotel implements Comparable<Hotel>{
     private int capacidad;
     private int [] contadorRanking;
     private Pila<Comentario> comentarios;
-    private Lista<Reserva> listaEspera;
-    private Lista<Servicio> servicios;
-    private TablaDCD<Reserva> reservas;
+    private Lista<Integer> listaEspera;
+    private Lista<String> servicios;
+    private TablaDCD<Integer> reservas;
     
     public int [] getContadorRanking(){
         return contadorRanking;
@@ -41,11 +41,11 @@ public class Hotel implements Comparable<Hotel>{
         this.comentarios = coment;
     }
     
-    public Lista<Reserva> getListaEspera(){
+    public Lista<Integer> getListaEspera(){
         return listaEspera;
     }
     
-    public void setListaEspera(Lista<Reserva> espera){
+    public void setListaEspera(Lista<Integer> espera){
         this.listaEspera = espera;
     }
     
@@ -80,6 +80,27 @@ public class Hotel implements Comparable<Hotel>{
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
     }
+
+    public Lista<String> getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(Lista<String> servicios) {
+        this.servicios = servicios;
+    }
+
+    public TablaDCD<Integer> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(TablaDCD<Integer> reservas) {
+        this.reservas = reservas;
+    }
+
+    public Hotel(String nombre) {
+        this.nombre = nombre;
+
+    }
     
     public Hotel(String nombre, String ciudad, int cantEstrellas, int capacidad)
     {
@@ -94,29 +115,13 @@ public class Hotel implements Comparable<Hotel>{
         this.contadorRanking = new int [6];
         this.comentarios = new Pila();
         this.listaEspera = new Lista();
+        this.reservas = new TablaDCD(capacidad);
+        this.servicios = new Lista<String>();
     }
     
-    public int calcularRanking(){
-        int suma = 0;
-        int contador = 0;
-        for(int i = 0; i<contadorRanking.length; i++){
-            suma+= (contadorRanking[i] * i);
-            contador = contadorRanking[i];
-        }
-        return suma / contador;
-    }    
-
-    @Override
+     @Override
     public int compareTo(Hotel o) {
-        if(nombre.compareTo(o.getNombre()) == 0){
-            if(ciudad.compareTo(o.getCiudad()) == 0){
-                return 0;
-            }
-            else{
-                return 1;
-            }
-        }
-        return -1;
+        return this.nombre.compareTo(o.getNombre());
     }
     
     @Override
@@ -126,4 +131,75 @@ public class Hotel implements Comparable<Hotel>{
         }
         return false;
     }
+    
+    @Override
+    public String toString(){
+        return this.ciudad +" - " + this.nombre + " - " + calcularRanking();
+    }
+    
+    public int calcularRanking(){
+        int suma = 0;
+        int contador = 0;
+        for(int i = 0; i<contadorRanking.length; i++){
+            suma+= (contadorRanking[i] * i);
+            contador = contadorRanking[i];
+        }
+        if(contador != 0){
+            return suma / contador;
+        }
+        return contador;
+    }    
+    
+    public void agregarReserva(Integer cliente){
+        if(this.reservas.getContador() == capacidad){
+            listaEspera.agregarInicio(cliente);
+        }
+        else{
+            reservas.insertar(cliente);
+        }
+    }
+    
+    public Sistema.TipoRet cancelarReserva(Integer cliente){
+        if(reservas.contiene(cliente)){
+            reservas.remover(cliente);
+            return Sistema.TipoRet.OK;
+        }
+        else if(listaEspera.contiene(cliente)){
+            listaEspera.removerItem(cliente);
+            return Sistema.TipoRet.OK;
+        }
+        return Sistema.TipoRet.ERROR_2;
+    }
+    
+    public void ingresarServicio(String servicio){
+        this.servicios.agregar(servicio);
+    }
+    
+    public Sistema.TipoRet eliminarServicio(String elServicio){
+        if(servicios.contiene(elServicio)){
+            servicios.removerItem(elServicio);
+            return Sistema.TipoRet.OK;
+        }
+        return Sistema.TipoRet.ERROR_2;
+    }
+    
+    public int ingresarComentario(Comentario elComentario){
+        this.comentarios.apilar(elComentario);
+        this.contadorRanking[elComentario.getRanking()]++;
+        return calcularRanking();
+    }
+    
+    public void listarServicios(){
+        //for(String unServicio : servicios)
+    }
+    
+    public void imprimirEspera(){
+        if(listaEspera.estaVacio()){
+            System.out.println("No existen reservas pendientes para el hotel "+ nombre + " " + ciudad);
+        }
+        else{
+            listaEspera.imprimir();
+        }
+    }
+    
 }

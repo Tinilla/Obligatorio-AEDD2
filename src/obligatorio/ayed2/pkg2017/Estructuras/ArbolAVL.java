@@ -112,4 +112,70 @@ public class ArbolAVL<T extends Comparable<T>> {
             return 1 + Math.max(alturaArbol(nodo.getIzquierdo()), alturaArbol(nodo.getDerecho())); // hacer una función que compare?
         }
     }
+    
+    public boolean contiene(T dato){
+        if(estaVacio()){
+            return false;
+        }
+        else{
+            NodoAVL<T> nodo = raiz;
+            while(nodo != null){
+                int comparacion = nodo.getDato().compareTo(dato);
+                if(comparacion == 0){
+                    return true;
+                }
+                else if(comparacion <0){
+                    nodo = nodo.getDerecho();
+                }
+                else{
+                    nodo = nodo.getIzquierdo();
+                }
+            }
+            return false;
+        }
+    }
+    
+    public T obtener(T dato){
+        if(estaVacio()){
+            return null;
+        }
+        else{
+            NodoAVL<T> nodo = raiz;
+            while(nodo != null){
+                int comparacion = nodo.getDato().compareTo(dato);
+                if(comparacion == 0){
+                    return nodo.getDato();
+                }
+                else if(comparacion <0){
+                    nodo = nodo.getDerecho();
+                }
+                else{
+                    nodo = nodo.getIzquierdo();
+                }
+            }
+            return null;
+        }
+        //return obtener(dato, raiz);
+    }
+    
+    private T obtener(T dato, NodoAVL<T> nodo){
+        if(nodo == null){
+            return null;
+        }
+        else if(nodo.getDato().compareTo(dato) == 0){
+            return nodo.getDato();
+        }
+        else{
+            if(nodo.getDato().compareTo(dato) > 0){
+                return (T)obtener(dato, nodo.getIzquierdo());
+            }
+            else{
+                return (T)obtener(dato, nodo.getDerecho());
+            }     
+        }
+    }
+    
+    public boolean estaVacio(){
+        return raiz == null;
+    }
 }

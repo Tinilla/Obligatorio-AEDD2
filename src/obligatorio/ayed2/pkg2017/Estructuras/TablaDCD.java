@@ -10,10 +10,10 @@ package obligatorio.ayed2.pkg2017.Estructuras;
  * @author Equipo
  */
 public class TablaDCD<T extends Comparable<T>>{
-    CeldaDCD<T>[] tablaHash; // extends ICelda
-    int tamanio;
-    int r;
-    int contador;
+    private CeldaDCD<T>[] tablaHash; // extends ICelda
+    private int tamanio;
+    private int r;
+    private int contador;
 
     public int getTamanio() {
         return tamanio;
@@ -33,6 +33,7 @@ public class TablaDCD<T extends Comparable<T>>{
         //r - primo menor
         //t - primo mayor
         tablaHash = new CeldaDCD[tamanio];
+        contador = 0;
         for(int i = 0; i< tamanio; i++){
             tablaHash[i] = new CeldaDCD(0, CeldaDCD.Estado.Vacio);
         }
@@ -54,6 +55,11 @@ public class TablaDCD<T extends Comparable<T>>{
             count ++;
         }
         tablaHash[posicion].setDato(dato);
+        contador++;
+    }
+    
+    public T obtener(T dato){
+        return dato;
     }
     
     public boolean contiene(T dato){
@@ -63,7 +69,7 @@ public class TablaDCD<T extends Comparable<T>>{
             if(tablaHash[posicion].getDato().compareTo(dato) == 0){
                 return true;
             }
-            posicion = (h(dato.hashCode()) + i * h2(dato.hashCode(), i)) % tamanio;
+            posicion = h(dato.hashCode()) + i * h2(dato.hashCode()) % tamanio;
             i++;
         }
         return false;
@@ -71,6 +77,7 @@ public class TablaDCD<T extends Comparable<T>>{
     
     public void remover(T dato){
         int posicion = h(dato.hashCode());
+        contador --;
     }
     
     public void print(){

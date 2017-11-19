@@ -63,6 +63,11 @@ public class TablaDispersionAbierta<T extends Comparable<T>>{
         }
     }
     
+    public T obtener(T dato){
+        
+        return dato;
+    }
+    
     private boolean esPrimo(int numero){
         int contador = 2;
         boolean primo=true;

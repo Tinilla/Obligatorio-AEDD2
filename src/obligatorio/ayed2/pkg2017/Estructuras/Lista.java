@@ -5,11 +5,13 @@
  */
 package obligatorio.ayed2.pkg2017.Estructuras;
 
+import java.util.Iterator;
+
 /**
  *
  * @author Equipo
  */
-public class Lista <T extends Comparable <T>> implements IListaDoble<T> {
+public class Lista <T extends Comparable <T>> implements IListaDoble<T>/*, Iterable<T>*/{
     
     NodoDoble<T> inicio;
     int contador;
@@ -29,9 +31,24 @@ public class Lista <T extends Comparable <T>> implements IListaDoble<T> {
             inicio = nodo;
         }
         else{
+            nodo.setSiguiente(null);
+            nodo.setAnterior(inicio);
+            inicio.setSiguiente(nodo);
+            inicio = nodo;
+        }
+        contador++;
+    }
+    
+    public void agregarInicio(T n){
+        NodoDoble<T> nodo = new NodoDoble<T> (n);
+        if(estaVacio()){
+            nodo.setSiguiente(null);
+            nodo.setAnterior(null);
+            inicio = nodo;
+        }
+        else{
             nodo.setSiguiente(inicio);
             nodo.setAnterior(null);
-            inicio.setSiguiente(nodo);
             inicio = nodo;
         }
         contador++;
@@ -56,8 +73,9 @@ public class Lista <T extends Comparable <T>> implements IListaDoble<T> {
     @Override
     public void imprimir(){
         NodoDoble<T> actual = inicio;
+        int contador = 1;
         while(actual != null){
-            System.out.println(actual.getDato());
+            System.out.println(contador++ + " - " + actual.getDato());
             actual = actual.getSiguiente();
         }
     }
@@ -138,4 +156,20 @@ public class Lista <T extends Comparable <T>> implements IListaDoble<T> {
         inicio = null;
         contador= 0;
     }
+    
+    /*public class Iterador<T> implements Iterator<T> {
+    private Nodo<T> actual = Lista.this.getRaiz();
+    @Override
+    public boolean hasNext() {
+        return actual < Lista.this.contador;
+    }
+
+    @Override
+    public T next() {
+        if(hasNext()){
+            return 
+        }
+    }   
+}*/
+
 }

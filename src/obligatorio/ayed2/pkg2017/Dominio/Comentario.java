@@ -10,60 +10,37 @@ package obligatorio.ayed2.pkg2017.Dominio;
  * @author Equipo
  */
 public class Comentario implements Comparable<Comentario>{
-    
-    private Hotel hotel;
     private String comentario;
     private int ranking;
-    
-    /**
-     * @return the hotel
-     */
-    public Hotel getHotel() {
-        return hotel;
-    }
 
-    /**
-     * @param hotel the hotel to set
-     */
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
-    }
-
-    /**
-     * @return the comentario
-     */
     public String getComentario() {
         return comentario;
     }
 
-    /**
-     * @param comentario the comentario to set
-     */
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
 
-    /**
-     * @return the ranking
-     */
     public int getRanking() {
         return ranking;
     }
 
-    /**
-     * @param ranking the ranking to set
-     */
     public void setRanking(int ranking) {
+        this.ranking = ranking;
+    }
+
+    public Comentario(String comentario, int ranking) {
+        this.comentario = comentario;
         this.ranking = ranking;
     }
 
     @Override
     public int compareTo(Comentario o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.comentario.compareTo(o.getComentario()); //To change body of generated methods, choose Tools | Templates.
+    }    
+    
+    @Override
+    public String toString(){
+        return this.comentario + " - " + this.ranking;
     }
-    
-    
-    
-    
-    
 }

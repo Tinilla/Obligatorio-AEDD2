@@ -40,7 +40,7 @@ public class Obligatorio_AyED2_2017 {
         System.out.println("Se crea el Sistema de Reservas vacio");
         tituloPrueba("PRUEBA 1: REGISTRAR HOTEL");
         p.ver(s.registrarHotel("Carmelo", "Urbano", 3, 20), Sistema.TipoRet.OK, "Se agrega el hotel Urbano de Carmelo");
-        p.ver(s.registrarHotel("Carmelo", "Four Season", 5, 300), Sistema.TipoRet.OK, "Se agrega el hotel Four Season de Carmelo");
+        p.ver(s.registrarHotel("Carmelo", "Four Seasons", 5, 300), Sistema.TipoRet.OK, "Se agrega el hotel Four Seasons de Carmelo");
         p.ver(s.registrarHotel("Carmelo", "Centro", 2, 20), Sistema.TipoRet.OK, "Se agrega el hotel Centro de Carmelo");
         p.ver(s.registrarHotel("Colonia", "Urbano", 2, 20), Sistema.TipoRet.OK, "Se agrega el hotel Urbano de Colonia");
         s.listarHotelesRanking();

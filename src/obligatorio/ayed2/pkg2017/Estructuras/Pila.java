@@ -4,13 +4,14 @@
  * and open the template in the editor.
  */
 package obligatorio.ayed2.pkg2017.Estructuras;
+import obligatorio.ayed2.pkg2017.Dominio.Comentario;
 /**
  *
  * @author Equipo
  */
-public class Pila<T extends Comparable<T>> implements IPila<T> {
+public class Pila<Comentario extends Comparable<Comentario>> implements IPila<Comentario> {
     
-    Nodo<T> tope;
+    Nodo<Comentario> tope;
     int contador;
     
     public int Contador()
@@ -19,8 +20,8 @@ public class Pila<T extends Comparable<T>> implements IPila<T> {
     }
     
     @Override 
-    public void apilar(T dato){
-        Nodo<T> viejoTope = tope;
+    public void apilar(Comentario dato){
+        Nodo<Comentario> viejoTope = tope;
         tope = new Nodo(dato);
         tope.setSiguiente(viejoTope);
         contador++;
@@ -28,8 +29,8 @@ public class Pila<T extends Comparable<T>> implements IPila<T> {
     
     
     @Override
-    public T desapilar(){
-        T dato = tope.getDato();
+    public Comentario desapilar(){
+        Comentario dato = tope.getDato();
         tope = tope.getSiguiente();
         contador--;
         return dato;
@@ -45,12 +46,12 @@ public class Pila<T extends Comparable<T>> implements IPila<T> {
         if(!estaVacio())
         {
             if(contador == 1){
-                T dato = desapilar();
-                System.out.println(dato);
+                Comentario dato = desapilar();
+                System.out.println(contador + " - " + dato);
                 apilar(dato);
             }
             else{
-                T dato = desapilar();
+                Comentario dato = desapilar();
                 System.out.println(dato);
                 imprimir();
                 apilar(dato);
@@ -58,18 +59,17 @@ public class Pila<T extends Comparable<T>> implements IPila<T> {
         }
     }
     
+    private void imprimit(int cuenta){
+        
+    }
+    
     @Override
-    public T ultimo(){
+    public Comentario ultimo(){
         return tope.getDato();
     }
     
     public Pila(){
         tope = null;
         contador= 0;
-    }
-    
-    
-    
-    
-    
+    }    
 }

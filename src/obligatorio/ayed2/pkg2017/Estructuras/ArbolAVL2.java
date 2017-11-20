@@ -5,18 +5,20 @@
  */
 package obligatorio.ayed2.pkg2017.Estructuras;
 
+import obligatorio.ayed2.pkg2017.Dominio.Hotel;
+
 /**
  *
  * @author Equipo
  */
-public class ArbolAVL<T extends Comparable<T>> {
-    private NodoAVL<T> raiz;
+public class ArbolAVL2<T extends Comparable<Hotel>> {
+    private NodoAVL<Hotel> raiz;
     
-    public void insertar(T dato){
+    public void insertar(Hotel dato){
         raiz = insertar(dato, raiz);
     }
     
-    private NodoAVL<T> insertar(T dato, NodoAVL<T> nodo){
+    private NodoAVL<Hotel> insertar(Hotel dato, NodoAVL<Hotel> nodo){
         if(nodo == null){
             return new NodoAVL(dato);
         }else if(dato.compareTo(nodo.getDato()) < 0){
@@ -46,8 +48,8 @@ public class ArbolAVL<T extends Comparable<T>> {
         return alturaIzquierda > alturaDerecha ? alturaIzquierda : alturaDerecha;
     }
     
-    private NodoAVL<T> rotacionHijoIzquierdo(NodoAVL<T> nodo){
-        NodoAVL<T> aux = nodo.getIzquierdo();
+    private NodoAVL<Hotel> rotacionHijoIzquierdo(NodoAVL<Hotel> nodo){
+        NodoAVL<Hotel> aux = nodo.getIzquierdo();
         nodo.setIzquierdo(aux.getDerecho());
         aux.setDerecho(nodo);
         nodo.setAltura(max(altura(aux.getIzquierdo()), nodo.getAltura()) + 1);
@@ -55,8 +57,8 @@ public class ArbolAVL<T extends Comparable<T>> {
         return aux;
     }
     
-    private NodoAVL<T> rotacionHijoDerecho(NodoAVL<T> nodo){
-        NodoAVL<T> aux = nodo.getDerecho();
+    private NodoAVL<Hotel> rotacionHijoDerecho(NodoAVL<Hotel> nodo){
+        NodoAVL<Hotel> aux = nodo.getDerecho();
         nodo.setDerecho(aux.getIzquierdo());
         aux.setIzquierdo(nodo);
         nodo.setAltura(max(altura(aux.getDerecho()), nodo.getAltura()) + 1);
@@ -64,17 +66,17 @@ public class ArbolAVL<T extends Comparable<T>> {
         return aux;
     }
     
-    private NodoAVL<T> rotacionDobleHijoIzquierdo(NodoAVL<T> nodo){
+    private NodoAVL<Hotel> rotacionDobleHijoIzquierdo(NodoAVL<Hotel> nodo){
         nodo.setIzquierdo(rotacionHijoDerecho(nodo.getIzquierdo()));
         return rotacionHijoDerecho(nodo);
     }
     
-    private NodoAVL<T> rotacionDobleHijoDerecho(NodoAVL<T> nodo){
+    private NodoAVL<Hotel> rotacionDobleHijoDerecho(NodoAVL<Hotel> nodo){
         nodo.setDerecho(rotacionHijoIzquierdo(nodo.getDerecho()));
         return rotacionHijoDerecho(nodo);
     }
     
-    private int altura(NodoAVL<T> nodo){
+    private int altura(NodoAVL<Hotel> nodo){
         return nodo == null ? -1 : nodo.getAltura();
     }
     
@@ -82,10 +84,10 @@ public class ArbolAVL<T extends Comparable<T>> {
         imprimirAscendente(raiz);
     }
     
-    private void imprimirAscendente(NodoAVL nodo){
+    private void imprimirAscendente(NodoAVL<Hotel> nodo){
         if(nodo != null){
             imprimirAscendente(nodo.getIzquierdo());
-            System.out.println(nodo.getDato());
+            System.out.println(nodo.getDato().toString2);
             imprimirAscendente(nodo.getDerecho());
         }
     }
@@ -94,7 +96,7 @@ public class ArbolAVL<T extends Comparable<T>> {
         imprimirDescendente(raiz);
     }
     
-    private void imprimirDescendente(NodoAVL<T> nodo){
+    private void imprimirDescendente(NodoAVL<Hotel> nodo){
         if(nodo != null){
             imprimirDescendente(nodo.getDerecho());
             System.out.println(nodo.getDato());
@@ -106,7 +108,7 @@ public class ArbolAVL<T extends Comparable<T>> {
         return alturaArbol(raiz);
     }
     
-    private int alturaArbol(NodoAVL<T> nodo){
+    private int alturaArbol(NodoAVL<Hotel> nodo){
         if(nodo == null){
             return -1;
         }else{
@@ -114,12 +116,12 @@ public class ArbolAVL<T extends Comparable<T>> {
         }
     }
     
-    public boolean contiene(T dato){
+    public boolean contiene(Hotel dato){
         if(estaVacio()){
             return false;
         }
         else{
-            NodoAVL<T> nodo = raiz;
+            NodoAVL<Hotel> nodo = raiz;
             while(nodo != null){
                 int comparacion = nodo.getDato().compareTo(dato);
                 if(comparacion == 0){
@@ -136,12 +138,12 @@ public class ArbolAVL<T extends Comparable<T>> {
         }
     }
     
-    public T obtener(T dato){
+    public Hotel obtener(Hotel dato){
         if(estaVacio()){
             return null;
         }
         else{
-            NodoAVL<T> nodo = raiz;
+            NodoAVL<Hotel> nodo = raiz;
             while(nodo != null){
                 int comparacion = nodo.getDato().compareTo(dato);
                 if(comparacion == 0){
@@ -159,7 +161,7 @@ public class ArbolAVL<T extends Comparable<T>> {
         //return obtener(dato, raiz);
     }
     
-    private T obtener(T dato, NodoAVL<T> nodo){
+    private Hotel obtener(Hotel dato, NodoAVL<Hotel> nodo){
         if(nodo == null){
             return null;
         }
@@ -168,10 +170,10 @@ public class ArbolAVL<T extends Comparable<T>> {
         }
         else{
             if(nodo.getDato().compareTo(dato) > 0){
-                return (T)obtener(dato, nodo.getIzquierdo());
+                return (Hotel)obtener(dato, nodo.getIzquierdo());
             }
             else{
-                return (T)obtener(dato, nodo.getDerecho());
+                return (Hotel)obtener(dato, nodo.getDerecho());
             }     
         }
     }

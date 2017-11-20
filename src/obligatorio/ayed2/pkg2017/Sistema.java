@@ -140,7 +140,14 @@ public class Sistema {
     }
     
     public TipoRet listarServicios(String Ciudad, String Hotel){
-        return TipoRet.NO_IMPLEMENTADA;
+        Ciudad laCiudad = ciudadesHoteles.obtener(new Ciudad(Ciudad));
+        if(laCiudad != null){
+            Hotel elHotel = laCiudad.getHoteles().obtener(new Hotel(Hotel));
+            if(elHotel != null){
+                elHotel.listarServicios();
+            }
+        }
+        return TipoRet.OK;
     }
     
     public TipoRet listarHotelesCiudad(String Ciudad){
@@ -184,7 +191,14 @@ public class Sistema {
     }
     
     public TipoRet listarEspera(String Ciudad, String Hotel){
-        return TipoRet.NO_IMPLEMENTADA;
+        Ciudad laCiudad = ciudadesHoteles.obtener(new Ciudad(Ciudad));
+        if(laCiudad != null){
+            Hotel elHotel = laCiudad.getHoteles().obtener(new Hotel(Hotel));
+            if(elHotel != null){
+                elHotel.imprimirEspera();
+            }
+        }
+        return TipoRet.ERROR_1;
     }
     
 }

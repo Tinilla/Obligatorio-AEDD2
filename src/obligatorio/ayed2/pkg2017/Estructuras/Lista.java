@@ -31,10 +31,14 @@ public class Lista <T extends Comparable <T>> implements IListaDoble<T>/*, Itera
             inicio = nodo;
         }
         else{
-            nodo.setSiguiente(null);
-            nodo.setAnterior(inicio);
-            inicio.setSiguiente(nodo);
-            inicio = nodo;
+            NodoDoble<T> aux = inicio;
+            while(aux.getSiguiente() != null){
+                aux = aux.getSiguiente();
+            }
+            aux.setSiguiente(nodo);
+            nodo.setAnterior(aux);
+            //inicio.setSiguiente(nodo);
+            //inicio = nodo;
         }
         contador++;
     }

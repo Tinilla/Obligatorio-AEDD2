@@ -26,6 +26,7 @@ public class Obligatorio_AyED2_2017 {
             PruebaOK_4(s,p);
             PruebaOK_5(s,p);
             PruebaOK_6(s,p);
+            PruebaOK_7(s,p);
           
         //-----------------------PRUEBAS ERROR------------------------//
         
@@ -122,7 +123,31 @@ public class Obligatorio_AyED2_2017 {
         finPrueba(" Fin PRUEBA 6");
     }
     
+    public static void PruebaOK_7(Sistema s, Prueba p){
+        s.crearSistemaReservas();
+        System.out.println("Se crea el Sistema de Reservas vacio");
+        tituloPrueba("PRUEBA 7: LISTAR HOTELES CIUDAD");
+        p.ver(s.registrarHotel("Carmelo", "Urbano", 3, 20), Sistema.TipoRet.OK, "Se agrega el hotel Urbano de Carmelo");
+        p.ver(s.registrarHotel("Carmelo", "Four Seasons", 5, 300), Sistema.TipoRet.OK, "Se agrega el hotel Four Seasons de Carmelo");
+        p.ver(s.registrarHotel("Carmelo", "Centro", 2, 20), Sistema.TipoRet.OK, "Se agrega el hotel Centro de Carmelo");
+        p.ver(s.registrarHotel("Colonia", "Urbano", 2, 20), Sistema.TipoRet.OK, "Se agrega el hotel Urbano de Colonia");
+        s.listarHotelesCiudad("Carmelo");
+        s.listarHotelesCiudad("Ombúes de Lavalle");
+        finPrueba(" Fin PRUEBA 7");
+    }
     
+    public static void PruebaOK_8(Sistema s, Prueba p){
+        s.crearSistemaReservas();
+        System.out.println("Se crea el Sistema de Reservas vacio");
+        tituloPrueba("PRUEBA 7: LISTAR SERVICIOS");
+        p.ver(s.registrarHotel("Carmelo", "Urbano", 3, 20), Sistema.TipoRet.OK, "Se agrega el hotel Urbano de Carmelo");
+        p.ver(s.registrarHotel("Carmelo", "Four Seasons", 5, 300), Sistema.TipoRet.OK, "Se agrega el hotel Four Seasons de Carmelo");
+        p.ver(s.registrarHotel("Carmelo", "Centro", 2, 20), Sistema.TipoRet.OK, "Se agrega el hotel Centro de Carmelo");
+        p.ver(s.registrarHotel("Colonia", "Urbano", 2, 20), Sistema.TipoRet.OK, "Se agrega el hotel Urbano de Colonia");
+        s.listarHotelesCiudad("Carmelo");
+        s.listarHotelesCiudad("Ombúes de Lavalle");
+        finPrueba(" Fin PRUEBA 7");
+    }
     
     
     public static void tituloPrueba(String s){

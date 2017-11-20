@@ -47,7 +47,7 @@ public class Pila<Comentario extends Comparable<Comentario>> implements IPila<Co
         {
             if(contador == 1){
                 Comentario dato = desapilar();
-                System.out.println(contador + " - " + dato);
+                System.out.println(dato);
                 apilar(dato);
             }
             else{

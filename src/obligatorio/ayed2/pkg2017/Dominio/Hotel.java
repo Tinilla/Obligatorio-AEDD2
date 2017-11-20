@@ -116,7 +116,7 @@ public class Hotel implements Comparable<Hotel>{
         this.comentarios = new Pila();
         this.listaEspera = new Lista();
         this.reservas = new TablaDCD(capacidad);
-        this.servicios = new Lista<String>();
+        this.servicios = new Lista<>();
     }
     
      @Override
@@ -135,6 +135,10 @@ public class Hotel implements Comparable<Hotel>{
     @Override
     public String toString(){
         return this.ciudad +" - " + this.nombre + " - " + calcularRanking();
+    }
+    
+    public String toString2(){
+        return this.nombre + " " + this.estrellas + " " + calcularRanking();
     }
     
     public int calcularRanking(){
@@ -172,7 +176,7 @@ public class Hotel implements Comparable<Hotel>{
     }
     
     public void ingresarServicio(String servicio){
-        this.servicios.agregar(servicio);
+        this.servicios.agregarInicio(servicio);
     }
     
     public Sistema.TipoRet eliminarServicio(String elServicio){
@@ -190,7 +194,12 @@ public class Hotel implements Comparable<Hotel>{
     }
     
     public void listarServicios(){
-        //for(String unServicio : servicios)
+        if(servicios.estaVacio()){
+            System.out.println("No existen servicios registrados en el hotel " + nombre + " " + ciudad);
+        }
+        else{
+            servicios.imprimir();
+        }
     }
     
     public void imprimirEspera(){

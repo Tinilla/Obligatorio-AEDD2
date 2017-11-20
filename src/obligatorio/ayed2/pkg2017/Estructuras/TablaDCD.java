@@ -25,7 +25,7 @@ public class TablaDCD<T extends Comparable<T>>{
 
     public TablaDCD(int tamanio) {
         r = primoMenor(tamanio);
-        tamanio = primoMayor(tamanio);
+        this.tamanio = primoMayor(tamanio);
         crear();
     }
     

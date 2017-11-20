@@ -39,6 +39,7 @@ public class TablaDispersionAbierta<T extends Comparable<T>>{
             tablaHash[posicion] = new Lista();
         }
         tablaHash[posicion].agregar(dato);
+        conteo++;
     }
     
     public boolean contiene(T dato){
@@ -52,6 +53,7 @@ public class TablaDispersionAbierta<T extends Comparable<T>>{
     public void remover(T dato){
         int posicion = h(dato.hashCode());
         tablaHash[posicion].removerItem(dato);
+        conteo--;
     }
     
     public void imprimir(){
@@ -64,8 +66,11 @@ public class TablaDispersionAbierta<T extends Comparable<T>>{
     }
     
     public T obtener(T dato){
-        
-        return dato;
+        int posicion = h(dato.hashCode());
+        if(tablaHash[posicion] != null){
+            return tablaHash[posicion].obtenerElemento(dato);
+        }
+        return null;
     }
     
     private boolean esPrimo(int numero){
